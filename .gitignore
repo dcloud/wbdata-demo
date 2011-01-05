@@ -1,0 +1,18 @@
+# ignore certain files, like a localsettings.py and any sqlite3 db
+
+.DS_Store
+
+# Ignore any sqlite3 databases that are in the repos and are named with .db
+*.db
+
+# Ignore compiled files
+*.pyc
+
+# local_settings.py is a file with overrides to items in settings.py
+local_settings.py
+
+pip-log.txt
+
+locale/*
+
+*.mo
