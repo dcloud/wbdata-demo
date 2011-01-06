@@ -1,17 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <title>country_object_detail</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block content %}
     <h2>{{ country.name }}</h2>
-    <ul>
-    {% for datapoint in datapoints %}
-        <li>{{ datapoint.indicator.id }}, {{ datapoint.year }}</li>
-    {% empty %}
-        <li>Sorry, no data points in this list!</li>
-    {% endfor %}
-    </ul>
-</body>
-</html>
+    <table id="datapoints">
+        <thead>
+            <tr>
+                <th scope="col">Indicator ID</th>
+                <th scope="col">Year</th>
+                <th scope="col">Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for datapoint in datapoints %}
+            <tr class="{% cycle 'odd' 'even' %}"><td>{{ datapoint.indicator.id }}</td><td>{{ datapoint.year }}</td><td>{{ datapoint.value }}</td></tr>
+            {% empty %}
+                <tr><td>Sorry, no data points in this list!</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+{% endblock %}
