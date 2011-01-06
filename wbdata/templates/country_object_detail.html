@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>country_object_detail</title>
+</head>
+<body>
+    <h2>{{ country.name }}</h2>
+    <ul>
+    {% for datapoint in datapoints %}
+        <li>{{ datapoint.indicator.id }}, {{ datapoint.year }}</li>
+    {% empty %}
+        <li>Sorry, no data points in this list!</li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
