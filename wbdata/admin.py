@@ -10,6 +10,6 @@ admin.site.register(Country)
 
 
 class DataPointAdmin(admin.ModelAdmin):
-    list_display = ('indicator', 'year', 'country')
+    list_display = ('indicator', 'year', 'country', 'value')
 
 admin.site.register(DataPoint, DataPointAdmin)
