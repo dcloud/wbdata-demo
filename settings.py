@@ -1,5 +1,7 @@
 # Django settings for wbdata_demo project.
 
+import os
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -83,6 +85,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(os.path.dirname(__file__), "templates"),
 )
 
 INSTALLED_APPS = (
@@ -102,4 +105,16 @@ INSTALLED_APPS = (
 CACHE_BACKEND = 'file:///var/tmp/wbdata_demo_cache'
 CACHE_MIDDLEWARE_SECONDS = 3600
 CACHE_MIDDLEWARE_KEY_PREFIX = ''
+
+# Usually this goes in a localsettings.py imported in the dev environment (not production)
+if DEBUG:
+    # Going to use debug_toolbar. 
+    INTERNAL_IPS = ('127.0.0.1',)
+    MIDDLEWARE_CLASSES += (
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+    )
+    INSTALLED_APPS += ('debug_toolbar',)
+    # Turn off real caching for dev purposes
+    CACHE_BACKEND = 'dummy://'
+    CACHE_MIDDLEWARE_SECONDS = 300
 

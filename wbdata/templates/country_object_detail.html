@@ -2,6 +2,7 @@
 {% block content %}
     <h2>{{ country.name }}</h2>
     <table id="datapoints">
+        <colgroup> <col> <col> <col class="last">
         <thead>
             <tr>
                 <th scope="col">Indicator ID</th>
@@ -10,12 +11,25 @@
             </tr>
         </thead>
         <tbody>
-            {% for datapoint in datapoints %}
+            {% for datapoint in datapoints.object_list %}
             <tr class="{% cycle 'odd' 'even' %}"><td>{{ datapoint.indicator.id }}</td><td>{{ datapoint.year }}</td><td>{{ datapoint.value }}</td></tr>
             {% empty %}
                 <tr><td>Sorry, no data points in this list!</td></tr>
             {% endfor %}
         </tbody>
     </table>
-    
+    <div class="pagination">
+        <span class="step-links">
+            {% if datapoints.has_previous %}
+                <a href="?page={{ contacts.previous_page_number }}">Previous</a>
+            {% endif %}
+            <span class="current">
+                &nbsp;Page {{ datapoints.number }} of {{ datapoints.paginator.num_pages }}&nbsp;
+            </span>
+
+            {% if datapoints.has_next %}
+                <a href="?page={{ datapoints.next_page_number }}">Next</a>
+            {% endif %}
+        </span>
+    </div>
 {% endblock %}

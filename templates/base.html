@@ -10,9 +10,38 @@
     
     <title>World Bank: Africa Data Indicators</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <style>
+        table {
+            border-collapse: collapse;
+            border: 1px solid #999;
+        }
+        thead {
+            border-bottom: 1px solid #999;
+        }
+        tr.even {
+            background-color: #DDD;
+        }
+        td {
+            padding: 2px 5px;
+        }
+        col {
+            border-right: 1px solid #999;
+        }
+        col.last {
+            border-right: none;
+        }
+        #wrapper {
+            width: 900px;
+            margin: 10px auto;
+        }
+        table#datapoints {
+            width: 700px;
+        }
+    </style>
 </head>
 <body id="{% block body_id %}home{% endblock %}">
+    <div id="wrapper">
     {% block content %}{% endblock %}
+    </div>
 </body>
 </html>
