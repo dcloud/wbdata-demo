@@ -37,7 +37,7 @@ class DataPoint(models.Model):
     indicator = models.ForeignKey(Indicator)
     country = models.ForeignKey(Country)
     year = models.PositiveIntegerField()
-    value = models.DecimalField(max_digits=28, decimal_places=14)
+    value = models.DecimalField(max_digits=128, decimal_places=14)
     
     class Meta:
         ordering = ['year', 'country']
