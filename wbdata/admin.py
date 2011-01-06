@@ -7,4 +7,9 @@ class IndicatorAdmin(admin.ModelAdmin):
 
 admin.site.register(Indicator, IndicatorAdmin)
 admin.site.register(Country)
-admin.site.register(DataPoint)
+
+
+class DataPointAdmin(admin.ModelAdmin):
+    list_display = ('indicator', 'year', 'country')
+
+admin.site.register(DataPoint, DataPointAdmin)
