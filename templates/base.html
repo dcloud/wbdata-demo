@@ -12,9 +12,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css?v=2">
     <script src="{{ STATIC_URL }}js/libs/modernizr-1.6.min.js"></script>
+    {% block extra_head %}{% endblock %}
 </head>
 <body id="{% block body_id %}home{% endblock %}">
     <div id="container">
+        <header>
+            <h1>World Bank: Africa Data Indicators</h1>
+        </header>
         <nav id="navbar">
             
         </nav>
