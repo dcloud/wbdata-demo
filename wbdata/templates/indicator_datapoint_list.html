@@ -1,23 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
-    <h2>{{ country.name }}</h2>
+    <h2>{{ indicator.name }}</h2>
     <table id="datapoints">
-        <colgroup> <col> <col> <col> <col class="last">
+        <colgroup> <col id="country"> <col id="year"> <col id="value" class="last">
         <thead>
             <tr>
-                <th scope="col">Indicator ID</th>
-                <th scope="col">Indicator Name</th>
+                <th scope="col">Country Name</th>
                 <th scope="col">Year</th>
                 <th scope="col">Value</th>
             </tr>
         </thead>
         <tbody>
-            {% for datapoint in datapoints.object_list %}
+            
+            {% for datapoint in  datapoints.object_list %}
             <tr class="{% cycle 'odd' 'even' %}">
-                <td>{{ datapoint.indicator.id }}</td>
-                <td>{{ datapoint.indicator.name }}</td>
+                <td>{{ datapoint.country.name }}</td>
                 <td>{{ datapoint.year }}</td>
-                <td>{{ datapoint.value }}</td>
+                <td class="value">{{ datapoint.value|floatformat:14 }}</td>
             </tr>
             {% empty %}
                 <tr><td>Sorry, no data points in this list!</td></tr>

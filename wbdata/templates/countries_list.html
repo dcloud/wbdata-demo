@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>List of countries</h2>
+    <ul>
+        {% for country in countries %}
+            <li><a href='{{ country.get_absolute_url }}'>{{ country.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
