@@ -44,7 +44,7 @@ class DataPoint(models.Model):
     
     class Meta:
         order_with_respect_to = 'indicator'
-        ordering = ['year', 'country']
+        ordering = ['-year', 'country']
     
     class Meta:
         unique_together = ("indicator", "country", "year")

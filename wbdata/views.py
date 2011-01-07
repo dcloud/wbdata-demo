@@ -30,10 +30,10 @@ def countries_list(request, template_name='wbdata/countries_list.html'):
 
 
 def country_indicator_list(request, country_id, indicator_id, template_name='wbdata/country_indicator_list.html'):
-    # country = get_object_or_404(Country, id=country_id.upper())
-    # indicator = get_object_or_404(Indicator, id=indicator_id.upper())
-    datapoints = get_list_or_404(DataPoint, country=country_id, indicator=indicator_id)
-    return render_to_response(template_name, {'datapoints': datapoints}, context_instance=RequestContext(request))
+    country = get_object_or_404(Country, id=country_id.upper())
+    indicator = get_object_or_404(Indicator, id=indicator_id.upper())
+    datapoints = get_list_or_404(DataPoint.objects.order_by('-year'), country=country_id, indicator=indicator_id)
+    return render_to_response(template_name, {'datapoints': datapoints, 'country': country, 'indicator': indicator}, context_instance=RequestContext(request))
     
 
 def indicator_object_detail(request, indicator_id, template_name='wbdata/indicator_datapoint_list.html'):
