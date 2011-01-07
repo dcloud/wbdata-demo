@@ -88,7 +88,7 @@ button {  width: auto; overflow: visible; }
 
 body {
     font-family: Arial, Verdana, sans-serif;
-    letter-spacing: -0.05em;
+    letter-spacing: -0.02em;
     background-color: #feffff;
     color: #203348;
 }
@@ -161,9 +161,21 @@ col.last {
     border-right: none;
 }
 
+col#value {
+    width: 25%;
+}
+
+td.value {
+    text-align: right;
+}
+
 #container {
     margin: 20px auto 0;
-    width:  960px;
+    width:  700px;
+}
+
+table#datapoints {
+    width: 100%;
 }
 
 .pagination {
