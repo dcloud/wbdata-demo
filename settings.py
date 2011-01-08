@@ -1,5 +1,9 @@
 # Django settings for wbdata_demo project.
 
+import os
+
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -45,17 +49,33 @@ USE_L10N = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = '/Users/daniel_cloud/Sites/wbdata/umedia/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = ''
+MEDIA_URL = '/media/umedia/'
+
+# The absolute path to the directory that holds static files like app media
+# django-staticfiles
+STATIC_ROOT = '/Users/daniel_cloud/Sites/wbdata/static/'
+
+STATIC_URL = '/media/static/'
+
+STATICFILES_MEDIA_DIRNAMES = (
+    'media',
+    'static', # Django 1.3 way: the future
+)
+
+# Additional directories which hold static files
+STATICFILES_DIRS = [
+    os.path.join(PROJECT_ROOT, "static"),
+]
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/media/'
+ADMIN_MEDIA_PREFIX = '/media/static/admin/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'wmu8#o(2=27&ucm*+u+9$5al4ny*68d^u9hd1ewhs++oa54byk'
@@ -65,6 +85,16 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.Loader',
+)
+
+# Need staticfiles context processor...
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.contrib.messages.context_processors.messages",
+    'staticfiles.context_processors.static_url',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -83,6 +113,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(PROJECT_ROOT, "templates"),
 )
 
 INSTALLED_APPS = (
@@ -95,6 +126,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     
+    'staticfiles',
     'wbdata',
 )
 
@@ -102,4 +134,16 @@ INSTALLED_APPS = (
 CACHE_BACKEND = 'file:///var/tmp/wbdata_demo_cache'
 CACHE_MIDDLEWARE_SECONDS = 3600
 CACHE_MIDDLEWARE_KEY_PREFIX = ''
+
+# Usually this goes in a localsettings.py imported in the dev environment (not production)
+if DEBUG:
+    # Going to use debug_toolbar. 
+    INTERNAL_IPS = ('127.0.0.1',)
+    MIDDLEWARE_CLASSES += (
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+    )
+    INSTALLED_APPS += ('debug_toolbar',)
+    # Turn off real caching for dev purposes
+    CACHE_BACKEND = 'dummy://'
+    CACHE_MIDDLEWARE_SECONDS = 300
 

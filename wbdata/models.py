@@ -31,6 +31,9 @@ class Country(models.Model):
             return self.name
         return self.id
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('country_object_detail', (), {'country_id': self.id})
 
 class DataPoint(models.Model):
     """Data for a particular indicator, country, and year"""
@@ -41,7 +44,7 @@ class DataPoint(models.Model):
     
     class Meta:
         order_with_respect_to = 'indicator'
-        ordering = ['year', 'country']
+        ordering = ['-year', 'country']
     
     class Meta:
         unique_together = ("indicator", "country", "year")
