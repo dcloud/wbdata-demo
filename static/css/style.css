@@ -93,17 +93,22 @@ body {
     color: #203348;
 }
 
-h1, h2 {
-    font-size: 138.5%;
-    line-height: 146.5%;
-}
-
 h1 {
+    font-size: 161.6%;
     margin-bottom: 10px;
     color: #484848;
     text-shadow: #ccd0d0 1px 1px 1px;
 }
 
+h2 {
+    font-size: 138.5%;
+    line-height: 146.5%;
+}
+
+h3 {
+    font-size: 108%;
+    margin-bottom: 5px;
+}
 
 h2, section > h1 {
     text-shadow: none;
@@ -116,7 +121,13 @@ p {
 }
 
 header {
-    margin-bottom: 40px;
+    background-color: #eee;
+    padding: 10px 8px;
+    margin-bottom: 10px;
+}
+
+header h1 {
+    margin: 0;
 }
 
 a:active {
