@@ -1,19 +1,19 @@
 from django.template import RequestContext
 from django.shortcuts import *
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
-from django.db.models import Max
+from django.db.models import Max, Min
 from models import *
 from datetime import datetime
 
-def country_object_detail(request, country_id, template_name='wbdata/country_object_detail.html'):
-    max_year = DataPoint.objects.all().aggregate(Max('year'))
-    end_year = max_year['year__max']
-    begin_year = end_year - 10
+def country_object_detail(request, country_id, year=None, template_name='wbdata/country_object_detail.html'):
+    if not year:
+        years = DataPoint.objects.all().aggregate(Max('year'))
+        year = years['year__max']
     country = get_object_or_404(Country, id=country_id.upper())
     # datapoint_list = country.datapoint_set.filter(year__range=(begin_year, end_year)).order_by('indicator__id', '-year')
-    datapoints = country.datapoint_set.filter(year=end_year).order_by('indicator__id')
+    datapoints = country.datapoint_set.filter(year=year).order_by('indicator__id')
     
-    return render_to_response(template_name, {'country': country, 'datapoints': datapoints, 'year': end_year}, context_instance=RequestContext(request))
+    return render_to_response(template_name, {'country': country, 'datapoints': datapoints, 'year': year}, context_instance=RequestContext(request))
 
 def countries_list(request, template_name='wbdata/countries_list.html'):
     countries = Country.objects.all()
@@ -28,9 +28,13 @@ def country_indicator_list(request, country_id, indicator_id, template_name='wbd
     return render_to_response(template_name, {'datapoints': datapoints, 'country': country, 'indicator': indicator}, context_instance=RequestContext(request))
     
 
-def indicator_object_detail(request, indicator_id, template_name='wbdata/indicator_datapoint_list.html'):
+def indicator_object_detail(request, indicator_id, year=None, template_name='wbdata/indicator_datapoint_list.html'):
+    if not year:
+        max_year = DataPoint.objects.all().aggregate(Max('year'))
+        year = max_year['year__max']
+
     indicator = get_object_or_404(Indicator, id=indicator_id)
-    datapoint_list = indicator.datapoint_set.order_by('country__id', '-year')
+    datapoint_list = indicator.datapoint_set.filter(year=year).order_by('indicator__id')
     
     paginator = Paginator(datapoint_list, 25)
     try:
