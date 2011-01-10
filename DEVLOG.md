@@ -17,21 +17,16 @@ Assignment Parameters
 
 How I would expand this...
 ==========================
-* More visualizations. Comparative charts of indicators between two or more countries. Maps, specifically heatmaps of Africa. Make it easier to see change over time and differences between countries. Allow for multiple indicators.
+* Better/more visualizations. Comparative charts of indicators between two or more countries. Maps, specifically heatmaps of Africa. Make it easier to see change over time and differences between countries. Allow for multiple indicators.  
+* Menus. I did a homepage menu, but not a persistent menu/nav bar. A simple solution would be a form to choose a country and an indicator, but it would be cool to have a menu that could help you build a query that could combine multiple vectors. So you could click a few indicators, a few countries, and maybe a few yers, and click submit and you'd get a page that graphs those values. I would use ajax to build the query (clicking names, years creates a list of vectors), and modify my urls/views to handle multiple items of one type. So a url like http://example.com/wbdata/country/ETH;BDI;ZWE/indicator/DT.ODA.NDAC.KD;GCI.12THPILLAR.XQ/year/1960;1980/ would gather data for Ethiopa, Burundi, and Zimbabwe for the indicators provided for the years provided. The regex for this would be simple to create, but I'm stopping myself from doing any more at this point. Did you notice that my urls are similar to the World Bank API (http://api.worldbank.org/indicators/NY.GDP.MKTP.CD)?
 * Intelligent grouping of Indicators by topic. The first part of the indicator code is a general topic. AG is agriculture, for example. However, some indicators could fall into multiple categories, such as 'EN.ATM.METH.AG.ZS' which is in *Environment* but concerns *Agriculture* as well (AG is later in the code). Probably a manual way to group in admin, like a Category model that can have multiple indicator IDs.
 * Additional apps that allow reporters to record notes on data, create custom lists or saved searches.
-* Robust search, perhaps using django-haystack.
+* Robust search, perhaps using django-haystack. **This is a big feature, especially given the number of indicators**
 * Data pruning. There is data for all of Africa, which I would take out and have the database calculate. Or perhaps migrate from a "Country" model to a "Location" model if we wanted to be able to go to different levels.
 * Consider NULL versus no entry for DataPoints where there was no data provided.
 * Separate app from project and test models against other country data. The way I set this up, it looks like I could start importing other datasets.
 * Consider the World Bank API. World Bank API allows us to access this information using RESTful requests, so that might provide a means to update and build the database out without importing csv from the command line.
 
-TODO
-====
-Didn't get started with an actual list til late in the game. Sorry. 
-<!--
-    TODO Make a homepage index to let user look at country with indicator data. Perhaps simple form with 2 dropdowns, one for country, one for Indicator
--->
 
 Issues
 ======
