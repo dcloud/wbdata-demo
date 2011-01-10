@@ -1,0 +1,109 @@
+{% extends "wbdata/base.html" %}
+{% block body_id %}country_indicator{% endblock %}
+{% block extra_head %}{{ block.super }}
+    <style>
+        #fig {
+          width: 100%;
+          height: 375px;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <h1><a href="{% url country_object_detail country_id=country.id %}">{{ country.name }}</a>&nbsp;/&nbsp;<a href="{% url indicator_object_detail indicator_id=indicator.id %}">{{ indicator.id }}</a></h1>
+    <h2>{{ indicator.name }}</h2>
+    <section id="description">
+        <h3>Description</h3>
+        <p>{{ indicator.source_note }}</p>
+    </section>
+    <div id="fig">
+        <script type="text/javascript+protovis">
+            var data = [{% for datapoint in datapoints reversed %}{year:{{ datapoint.year}},value:{{ datapoint.value}}}{% if not forloop.last %},{% endif %}{% endfor %}],
+                w = 650,
+                h = 325,
+                x = pv.Scale.linear(data[0].year, data[data.length-1].year).range(0, w),
+                y = pv.Scale.linear(Math.floor(data[0].value), Math.ceil(data[data.length-1].value)).range(0, h);
+                
+                x.tickFormat(5); // Set frequency of ticks
+                y.domain(data, function(d) d.value)
+                var color = '#316B4D';
+            
+            // Root panel
+            var vis = new pv.Panel()
+                      .width(w)
+                      .height(h)
+                      .bottom(20)
+                      .left(10)
+                      .right(10)
+                      .top(30)
+                      .def("active", false);
+
+            vis.add(pv.Rule)
+              .data(y.ticks())
+              .visible(function() !(this.index % 2))
+              .bottom(function(d) Math.round(y(d)) - .5)
+              .strokeStyle("#eee");
+            // .anchor("left").add(pv.Label)
+            //                 .textMargin(6)
+            //                 .textAlign("left")
+            //                 .text(function(d) d.toFixed(1));
+
+            vis.add(pv.Rule)
+              .data(x.ticks())
+              .visible(function(d) d > 0)
+              .left(function(d) Math.round(x(d)))
+              .strokeStyle("#eee")
+            .anchor("bottom").add(pv.Label)
+              .text(function(d) d.toFixed());
+              
+            var line = vis.add(pv.Line)
+              .data(data)
+              .interpolate("cardinal")
+              .left(function(d) x(d.year))
+              .bottom(function(d) y(d.value))
+              .title(function(d) d.value)
+              .lineWidth(2)
+              .strokeStyle(color);
+              
+              line.add(pv.Dot)
+                .strokeStyle(color)
+                .fillStyle(color);
+              
+            vis.render();
+        </script>
+    </div>
+    <table id="datapoints">
+        <colgroup> <col id="year"> <col id="value"> <col class="last">
+        <thead>
+            <tr>
+                <th scope="col">Value</th>
+                <th scope="col">Year</th>
+                <th scope="col">Links</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for datapoint in datapoints %}
+            <tr class="{% cycle 'odd' 'even' %}">
+                <td>{{ datapoint.value }}</td>
+                <td>{{ datapoint.year }}</td>
+                <td class="links"><a href="{% url indicator_object_year_detail indicator_id=indicator.id year=datapoint.year %}">More '{{ indicator.name|truncatewords:3 }}' data for {{ datapoint.year }}</a></td>
+            </tr>
+            {% empty %}
+                <tr><td>Sorry, no data points in this list!</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {# <div class="pagination"> #}
+    {#     <span class="step-links"> #}
+    {#         {% if datapoints.has_previous %} #}
+    {#             <a href="?page={{ contacts.previous_page_number }}">Previous</a> #}
+    {#         {% endif %} #}
+    {#         <span class="current"> #}
+    {#             &nbsp;Page {{ datapoints.number }} of {{ datapoints.paginator.num_pages }}&nbsp; #}
+    {#         </span> #}
+    {#  #}
+    {#         {% if datapoints.has_next %} #}
+    {#             <a href="?page={{ datapoints.next_page_number }}">Next</a> #}
+    {#         {% endif %} #}
+    {#     </span> #}
+    {# </div> #}
+{% endblock %}

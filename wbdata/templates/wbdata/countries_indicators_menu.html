@@ -1,0 +1,16 @@
+{% extends "wbdata/base.html" %}
+{% block body_id %}{% endblock %}
+{% block content %}
+<section id="countries" class="menu">
+    <h1>Countries</h1>
+    <ul>{% for country in countries %}
+            <li class="{% cycle 'odd' 'even' %}"><h2><a href='{{ country.get_absolute_url }}'>{{ country.name }}</a></h2></li>{% endfor %}
+    </ul>    
+</section>
+<section id="indicators" class="menu">
+    <h1>Indicators</h1>
+    <ul>{% for indicator in indicators %}
+            <li class="{% cycle 'odd' 'even' %}"><h2><a href='{{ indicator.get_absolute_url }}' title='{{ indicator.id }}'>{{ indicator.name }}</a></h2></li>{% endfor %}
+    </ul>        
+</section>
+{% endblock %}
