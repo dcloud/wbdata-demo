@@ -15,6 +15,10 @@ class Indicator(models.Model):
             return self.name
         return self.id
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('indicator_object_detail', (), {'indicator_id': self.id})
+
 
 class Country(models.Model):
     """Describes a country in terms of World Bank data"""
