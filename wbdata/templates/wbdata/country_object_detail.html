@@ -2,13 +2,12 @@
 {% block body_id %}country_detail{% endblock %}
 {% block content %}
     <section>
-        <h1 class="countryname">{{ country.name }}</h1>
-        <p>This page shows data for the most recent available year: <strong>{{ year }}</strong></p>        
+        <h1 class="countryname">{{ country.name }}&nbsp;/&nbsp;{{ year }}</h1>
     </section>
     <section id="datapoints">
     {% for datapoint in datapoints %}<article id="{{ datapoint.indicator.id }}" class="{% cycle 'odd' 'even'  %}">
         <h1>{{ datapoint.indicator.name }}</h1>
-        <p>{{ datapoint.value }}</p>
+        <p class="data_value">{{ datapoint.value }}</p>
         <p><a href="{% url country_indicator_list country_id=country.id indicator_id=datapoint.indicator.id %}">Explore data&nbsp;&rarr;</a></p>
         <aside>
             <h2>Source Note</h2>

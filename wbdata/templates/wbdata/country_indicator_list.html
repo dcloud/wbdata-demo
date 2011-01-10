@@ -14,6 +14,7 @@
     <section id="description">
         <h3>Description</h3>
         <p>{{ indicator.source_note }}</p>
+        <p><a href="{% url indicator_object_detail indicator_id=indicator.id %}">Explore this indicator ({{ indicator.id }})</a>&nbsp;&rarr;</p>
     </section>
     <div id="fig">
         <script type="text/javascript+protovis">
@@ -72,18 +73,20 @@
         </script>
     </div>
     <table id="datapoints">
-        <colgroup> <col id="year"> <col id="value" class="last">
+        <colgroup> <col id="year"> <col id="value"> <col class="last">
         <thead>
             <tr>
-                <th scope="col">Year</th>
                 <th scope="col">Value</th>
+                <th scope="col">Year</th>
+                <th scope="col">Links</th>
             </tr>
         </thead>
         <tbody>
             {% for datapoint in datapoints %}
             <tr class="{% cycle 'odd' 'even' %}">
-                <td>{{ datapoint.year }}</td>
                 <td>{{ datapoint.value }}</td>
+                <td>{{ datapoint.year }}</td>
+                <td class="links"><a href="{% url indicator_object_year_detail indicator_id=indicator.id year=datapoint.year %}">More '{{ indicator.name|truncatewords:3 }}' data for {{ datapoint.year }}</a></td>
             </tr>
             {% empty %}
                 <tr><td>Sorry, no data points in this list!</td></tr>

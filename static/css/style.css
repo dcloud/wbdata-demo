@@ -116,12 +116,15 @@ h3 {
 
 h2, section > h1 {
     text-shadow: none;
-    color: #316B4D;
     margin-bottom: 10px;
 }
 
 p {
     margin-bottom: 12px;
+}
+
+p.data_value {
+    font-size: 182%;
 }
 
 header {
@@ -158,7 +161,7 @@ article h1 {
 }
 
 #datapoints {
-    margin: 40px 0;
+    margin: 40px 0 0;
 }
 
 #datapoints article {
@@ -220,12 +223,22 @@ col#value {
     width: 25%;
 }
 
+td.year {
+    text-align: center;
+}
+
 td.value {
     text-align: right;
 }
 
+td.links, td.links > a {
+    font-size: 85%;
+    color: #666;
+    text-align: right;
+}
+
 #container {
-    margin: 20px auto 0;
+    margin: 20px auto 40px;
     width:  700px;
 }
 
