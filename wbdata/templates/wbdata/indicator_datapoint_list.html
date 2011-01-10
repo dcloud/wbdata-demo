@@ -1,25 +1,27 @@
 {% extends "wbdata/base.html" %}
+{% block body_id %}indicator{% endblock %}
 {% block content %}
     <h2>{{ indicator.name }}</h2>
+    <p class="description">{{ indicator.source_note }}</p>
     <table id="datapoints">
-        <colgroup> <col id="country"> <col id="year"> <col id="value" class="last">
+        <colgroup> <col id="country"> <col id="value"> <col id="year" class="last">
         <thead>
             <tr>
                 <th scope="col">Country Name</th>
-                <th scope="col">Year</th>
                 <th scope="col">Value</th>
+                <th scope="col">Year</th>
             </tr>
         </thead>
         <tbody>
             
             {% for datapoint in  datapoints.object_list %}
             <tr class="{% cycle 'odd' 'even' %}">
-                <td>{{ datapoint.country.name }}</td>
-                <td>{{ datapoint.year }}</td>
+                <td><a href="{% url country_indicator_list indicator_id=indicator.id country_id=datapoint.country.id %}" title="{{ datapoint.country.name }}'s data concerning {{ indicator.id }}">{{ datapoint.country.name }}</a></td>
                 <td class="value">{{ datapoint.value|floatformat:14 }}</td>
+                <td class="year">{{ datapoint.year }}</td>
             </tr>
             {% empty %}
-                <tr><td>Sorry, no data points in this list!</td></tr>
+                <tr><td colspan=3>Sorry, no data points for these parameters!</td></tr>
             {% endfor %}
         </tbody>
     </table>

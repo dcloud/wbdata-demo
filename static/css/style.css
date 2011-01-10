@@ -94,10 +94,14 @@ body {
 }
 
 h1 {
-    font-size: 161.6%;
+    font-size: 146.5%;
     margin-bottom: 10px;
     color: #484848;
     text-shadow: #ccd0d0 1px 1px 1px;
+}
+
+h1.countryname {
+    font-size: 197%;
 }
 
 h2 {
@@ -112,12 +116,15 @@ h3 {
 
 h2, section > h1 {
     text-shadow: none;
-    color: #316B4D;
     margin-bottom: 10px;
 }
 
 p {
     margin-bottom: 12px;
+}
+
+p.data_value {
+    font-size: 182%;
 }
 
 header {
@@ -128,6 +135,10 @@ header {
 
 header h1 {
     margin: 0;
+}
+
+header h1 > a, header h1 > a:visited {
+    color: #666;
 }
 
 a:active {
@@ -147,6 +158,46 @@ nav a {
 
 article {
     margin-bottom: 20px;
+}
+
+article h1 {
+    font-size: 138.5%;
+}
+
+#datapoints {
+    margin: 40px 0 0;
+}
+
+#datapoints article {
+    width: 340px;
+    min-height: 150px;
+    border-bottom: 1px solid #EEE;
+    display: -moz-inline-stack;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 10px 25px 0;
+    zoom: 1;
+    *display: inline;
+    _height: 150px;
+}
+
+#datapoints article p {
+    margin-bottom: 6px;
+}
+
+#country_detail article.even {
+    margin-right:0;
+    margin-left: 10px;
+}
+
+aside {
+    font-size: 85%;
+    color: #8A8A8A;
+}
+
+aside > h2 {
+    font-size: 108%;
+    cursor: pointer;
 }
 
 table {
@@ -176,12 +227,22 @@ col#value {
     width: 25%;
 }
 
+td.year {
+    text-align: center;
+}
+
 td.value {
     text-align: right;
 }
 
+td.links, td.links > a {
+    font-size: 85%;
+    color: #666;
+    text-align: right;
+}
+
 #container {
-    margin: 20px auto 0;
+    margin: 20px auto 40px;
     width:  700px;
 }
 
@@ -193,6 +254,41 @@ table#datapoints {
     margin-top: 5px;
 }
 
+#description p {
+    font-size: 93%;
+}
+
+section.menu {
+    margin-bottom: 20px;
+}
+
+section.menu ul {
+    list-style-type: none;
+    margin: 0;
+}
+
+section.menu li {
+    background-color: #F0F6F4;
+    margin: 0 10px 8px 0;
+    display: -moz-inline-stack;
+    display: inline-block;
+    vertical-align: top;
+    zoom: 1;
+    *display: inline;
+}
+
+section.menu li.odd {
+    background-color: #F8F8F8;
+}
+
+section.menu li h2 {
+    margin: 0;
+}
+
+section.menu li a {
+    display: block;
+    padding: 4px 12px;
+}
 
 @media print {
   * { background: transparent !important; color: #444 !important; text-shadow: none !important; }
