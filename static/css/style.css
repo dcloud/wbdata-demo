@@ -137,6 +137,10 @@ header h1 {
     margin: 0;
 }
 
+header h1 > a, header h1 > a:visited {
+    color: #666;
+}
+
 a:active {
     border: none;
 }
@@ -252,6 +256,38 @@ table#datapoints {
 
 #description p {
     font-size: 93%;
+}
+
+section.menu {
+    margin-bottom: 20px;
+}
+
+section.menu ul {
+    list-style-type: none;
+    margin: 0;
+}
+
+section.menu li {
+    background-color: #F0F6F4;
+    margin: 0 10px 8px 0;
+    display: -moz-inline-stack;
+    display: inline-block;
+    vertical-align: top;
+    zoom: 1;
+    *display: inline;
+}
+
+section.menu li.odd {
+    background-color: #F8F8F8;
+}
+
+section.menu li h2 {
+    margin: 0;
+}
+
+section.menu li a {
+    display: block;
+    padding: 4px 12px;
 }
 
 @media print {
