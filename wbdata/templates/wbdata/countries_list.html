@@ -1,9 +1,11 @@
 {% extends "wbdata/base.html" %}
 {% block content %}
-    <h2>List of countries</h2>
+    <h2>Countries</h2>
     <ul>
         {% for country in countries %}
-            <li><a href='{{ country.get_absolute_url }}'>{{ country.name }}</a></li>
+            <li>
+                <h3><a href='{{ country.get_absolute_url }}'>{{ country.name }}</a></h3>
+            </li>
         {% endfor %}
     </ul>
 {% endblock %}

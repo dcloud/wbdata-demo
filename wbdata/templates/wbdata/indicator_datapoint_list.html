@@ -1,6 +1,7 @@
 {% extends "wbdata/base.html" %}
 {% block content %}
     <h2>{{ indicator.name }}</h2>
+    <p class="description">{{ indicator.source_note }}</p>
     <table id="datapoints">
         <colgroup> <col id="country"> <col id="year"> <col id="value" class="last">
         <thead>

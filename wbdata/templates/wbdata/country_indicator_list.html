@@ -4,18 +4,22 @@
     <style>
         #fig {
           width: 100%;
-          height: 425px;
+          height: 375px;
         }
     </style>
 {% endblock %}
 {% block content %}
-    <h2>Country: {{ country.name }}</h2>
-    <h3>Indicator: {{ indicator.name }}</h3>
+    <h1>Country: <a href="{% url country_object_detail country_id=country.id %}">{{ country.name }}</a></h1>
+    <h2>{{ indicator.name }}</h2>
+    <section id="description">
+        <h3>Description</h3>
+        <p>{{ indicator.source_note }}</p>
+    </section>
     <div id="fig">
         <script type="text/javascript+protovis">
             var data = [{% for datapoint in datapoints reversed %}{year:{{ datapoint.year}},value:{{ datapoint.value}}}{% if not forloop.last %},{% endif %}{% endfor %}],
                 w = 650,
-                h = 350,
+                h = 325,
                 x = pv.Scale.linear(data[0].year, data[data.length-1].year).range(0, w),
                 y = pv.Scale.linear(Math.floor(data[0].value), Math.ceil(data[data.length-1].value)).range(0, h);
                 
@@ -30,7 +34,7 @@
                       .bottom(20)
                       .left(10)
                       .right(10)
-                      .top(50)
+                      .top(30)
                       .def("active", false);
 
             vis.add(pv.Rule)

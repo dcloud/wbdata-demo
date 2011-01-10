@@ -94,10 +94,14 @@ body {
 }
 
 h1 {
-    font-size: 161.6%;
+    font-size: 146.5%;
     margin-bottom: 10px;
     color: #484848;
     text-shadow: #ccd0d0 1px 1px 1px;
+}
+
+h1.countryname {
+    font-size: 197%;
 }
 
 h2 {
@@ -149,6 +153,46 @@ article {
     margin-bottom: 20px;
 }
 
+article h1 {
+    font-size: 138.5%;
+}
+
+#datapoints {
+    margin: 40px 0;
+}
+
+#datapoints article {
+    width: 340px;
+    min-height: 150px;
+    border-bottom: 1px solid #EEE;
+    display: -moz-inline-stack;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 10px 25px 0;
+    zoom: 1;
+    *display: inline;
+    _height: 150px;
+}
+
+#datapoints article p {
+    margin-bottom: 6px;
+}
+
+#country_detail article.even {
+    margin-right:0;
+    margin-left: 10px;
+}
+
+aside {
+    font-size: 85%;
+    color: #8A8A8A;
+}
+
+aside > h2 {
+    font-size: 108%;
+    cursor: pointer;
+}
+
 table {
     border-collapse: collapse;
     border: 1px solid #999;
@@ -193,6 +237,9 @@ table#datapoints {
     margin-top: 5px;
 }
 
+#description p {
+    font-size: 93%;
+}
 
 @media print {
   * { background: transparent !important; color: #444 !important; text-shadow: none !important; }
