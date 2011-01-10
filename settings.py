@@ -54,13 +54,15 @@ MEDIA_ROOT = '/Users/daniel_cloud/Sites/wbdata/umedia/'
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = '/media/umedia/'
+# MEDIA_URL = '/media/umedia/'
+MEDIA_URL = 'http://localhost/~daniel_cloud/wbdata/umedia/'
 
 # The absolute path to the directory that holds static files like app media
 # django-staticfiles
 STATIC_ROOT = '/Users/daniel_cloud/Sites/wbdata/static/'
 
-STATIC_URL = '/media/static/'
+# STATIC_URL = '/media/static/'
+STATIC_URL = 'http://localhost/~daniel_cloud/wbdata/static/'
 
 STATICFILES_MEDIA_DIRNAMES = (
     'media',
@@ -131,7 +133,8 @@ INSTALLED_APPS = (
 )
 
 # Cache settings
-CACHE_BACKEND = 'file:///var/tmp/wbdata_demo_cache'
+# CACHE_BACKEND = 'file:///var/tmp/wbdata_demo_cache'
+CACHE_BACKEND = 'dummy://'
 CACHE_MIDDLEWARE_SECONDS = 3600
 CACHE_MIDDLEWARE_KEY_PREFIX = ''
 

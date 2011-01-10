@@ -8,6 +8,8 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+
+    url(r'^$', 'django.views.generic.simple.redirect_to', { 'url': 'wbdata/'}),
     # Example:
     # (r'^wbdata_demo/', include('wbdata_demo.foo.urls')),
     (r'^wbdata/', include('wbdata.urls')),
