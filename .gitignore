@@ -2,9 +2,6 @@
 
 .DS_Store
 
-# Ignore any sqlite3 databases that are in the repos and are named with .db
-*.db
-
 # Ignore compiled files
 *.pyc
 
