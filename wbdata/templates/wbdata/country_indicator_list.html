@@ -9,12 +9,11 @@
     </style>
 {% endblock %}
 {% block content %}
-    <h1>Country: <a href="{% url country_object_detail country_id=country.id %}">{{ country.name }}</a></h1>
+    <h1><a href="{% url country_object_detail country_id=country.id %}">{{ country.name }}</a>&nbsp;/&nbsp;<a href="{% url indicator_object_detail indicator_id=indicator.id %}">{{ indicator.id }}</a></h1>
     <h2>{{ indicator.name }}</h2>
     <section id="description">
         <h3>Description</h3>
         <p>{{ indicator.source_note }}</p>
-        <p><a href="{% url indicator_object_detail indicator_id=indicator.id %}">Explore this indicator ({{ indicator.id }})</a>&nbsp;&rarr;</p>
     </section>
     <div id="fig">
         <script type="text/javascript+protovis">
