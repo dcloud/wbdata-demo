@@ -26,7 +26,7 @@ def country_object_detail(request, country_id, year=None, template_name='wbdata/
     
     return render_to_response(template_name, {'country': country, 'datapoints': datapoints, 'year': year}, context_instance=RequestContext(request))
 
-def countries_list(request, template_name='wbdata/countries_list.html'):
+def countries_list(request, template_name='wbdata/countries_indicators_menu.html'):
     countries = Country.objects.all()
     indicators = Indicator.objects.all()
     return render_to_response(template_name, {'countries': countries, 'indicators': indicators}, context_instance=RequestContext(request))
