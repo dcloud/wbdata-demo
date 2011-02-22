@@ -8,23 +8,23 @@ import decimal
 from csv import DictReader
 
 
-wb_data_types = (
+WB_DATA_TYPES = (
     'Data',
     'Country',
     'Series',
 )
 
-filename_delim = '_'
+FILENAME_DELIM = '_'
 
-filename_parts_list = ['%s%s' % (filename_delim, x) for x in (wb_data_types)]
+FILENAME_PARTS_LIST = ['%s%s' % (FILENAME_DELIM, x) for x in (WB_DATA_TYPES)]
 
-countries_map = (
+COUNTRIES_MAP = (
     ('Country_Code', 'id'),
     ('Country_Name', 'name'),
     ('Source_note', 'source_note'),
 )
 
-series_map = (
+SERIES_MAP = (
     ('Indicator_Code'),
     ('Indicator_Name'),
     ('Level_1'),
@@ -46,7 +46,7 @@ def save_object(obj):
     
 class Command(BaseCommand):
     args = 'csvfile [csvfile ...]'
-    help = "Imports World Bank development indicators data from the csv file(s) into the database. Currently works only with files with %s in the filename" % filename_parts_list
+    help = "Imports World Bank development indicators data from the csv file(s) into the database. Currently works only with files with %s in the filename" % FILENAME_PARTS_LIST
 
     def handle(self, *csvfiles, **options):
         for csvfile in csvfiles:
@@ -54,8 +54,8 @@ class Command(BaseCommand):
                 basename = os.path.basename(csvfile)
                 (root, ext) = os.path.splitext(basename)
                 # This approach will break on filenames not being seriestitle_datatype.csv, but we need to assume some uniformity of the csv (and I checked a few myself)
-                parts = root.split(filename_delim)
-                if parts[-1] in wb_data_types:                    
+                parts = root.split(FILENAME_DELIM)
+                if parts[-1] in WB_DATA_TYPES:                    
                     fp = open(csvfile, 'rb')
                     reader = DictReader(fp)
                     rows = [row for row in reader]
@@ -83,5 +83,5 @@ class Command(BaseCommand):
                                         save_object(obj)
                     fp.close()
                 else:
-                    print "%s does not have %s in the filename. Skipping..." % (basename, filename_parts_list)
+                    print "%s does not have %s in the filename. Skipping..." % (basename, FILENAME_PARTS_LIST)
         print "Finished importing World Bank data"
